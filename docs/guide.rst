@@ -63,9 +63,9 @@ The |HPC| has a monthly release cadence while in alpha status.
 Releases happen on the 15th of every month.
 We use `Calendar Versioning`_ with a ``YYYY.MM.DD`` versioning scheme.
 
-The current stable release is `2021.1.29`_.
+The current stable release is `2021.4.15`_.
 
-.. _2021.1.29: https://github.com/cjolowicz/cookiecutter-hypermodern-python/releases/tag/2021.1.29
+.. _2021.4.15: https://github.com/cjolowicz/cookiecutter-hypermodern-python/releases/tag/2021.4.15
 
 
 .. _Installation:
@@ -220,12 +220,12 @@ Creating a project
 
 Create a project from this template
 by pointing Cookiecutter to its `GitHub repository <Hypermodern Python Cookiecutter_>`__.
-Use the ``--checkout`` option with the `current stable release <2021.1.29_>`__:
+Use the ``--checkout`` option with the `current stable release <2021.4.15_>`__:
 
 .. code:: console
 
    $ cookiecutter gh:cjolowicz/cookiecutter-hypermodern-python \
-     --checkout="2021.1.29"
+     --checkout="2021.4.15"
 
 Cookiecutter downloads the template,
 and asks you a series of questions about project variables,
@@ -250,6 +250,7 @@ Here is a complete list of the project variables defined by this template:
    ``email``          E-mail address of the author    katherine@example.com
    ``github_user``    GitHub username of the author   ``katherine``
    ``version``        Initial project version         ``0.0.0``
+   ``license``        The project license             ``MIT``
    ================== =============================== ======================
 
 .. note::
@@ -411,6 +412,7 @@ The ``.github/workflows`` directory contains the :ref:`GitHub Actions workflows 
    ======================= ===============================
    ``release.yml``         :ref:`The Release workflow`
    ``tests.yml``           :ref:`The Tests workflow`
+   ``labeler.yml``         :ref:`The Labeler workflow`
    ======================= ===============================
 
 The project contains many configuration files for developer tools.
@@ -529,14 +531,14 @@ The test suite is `declared as a package`__,
 and mirrors the source layout of the package under test.
 The file ``test_main.py`` contains tests for the ``__main__`` module.
 
-__ http://doc.pytest.org/en/latest/goodpractices.html#tests-outside-application-code
+__ https://docs.pytest.org/en/latest/explanation/goodpractices.html#choosing-a-test-layout-import-rules
 
 Initially, the test suite contains a single test case,
 checking whether the program exits with a status code of zero.
 It also provides a `test fixture`_ using `click.testing.CliRunner`_,
 a helper class for invoking the program from within tests.
 
-.. _test fixture: https://docs.pytest.org/en/latest/fixture.html
+.. _test fixture: https://docs.pytest.org/en/latest/explanation/fixtures.html#about-fixtures
 .. _click.testing.CliRunner: https://click.palletsprojects.com/en/7.x/testing/
 
 For details on how to run the test suite,
@@ -567,7 +569,7 @@ The top-level directory contains several stand-alone documentation files:
 .. _Contributor Covenant: https://www.contributor-covenant.org
 
 ``LICENSE.rst``
-   This file contains the text of the `MIT license`_, a simple permissive license.
+   This file contains the text of your project's license.
 
 .. note::
 
@@ -855,7 +857,7 @@ it creates a special ``.egg-link`` file that links to your local source code.
 This means that code edits are directly visible in the environment
 without the need to reinstall your package.
 
-__ https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs
+__ https://pip.pypa.io/en/stable/cli/pip_install/#install-editable
 
 Installing your package implicitly creates the virtual environment
 if it does not exist yet,
@@ -1840,7 +1842,7 @@ Here is an example of a function documented in Google style:
            The sum of the arguments.
        """
 
-.. _Google docstring style: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings.
+.. _Google docstring style: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
 
 
 flake8-rst-docstrings
@@ -1973,29 +1975,9 @@ For details about supported configuration options, see the `official reference`_
 __ https://mypy.readthedocs.io/en/stable/config_file.html
 
 The |HPC| enables several configuration options which are off by default.
-The following options are enabled for strictness:
+The following options are enabled for strictness and enhanced output:
 
-- :option:`check_untyped_defs <mypy --check-untyped-defs>`
-- :option:`disallow_any_generics <mypy --disallow-any-generics>`
-- :option:`disallow_incomplete_defs <mypy --disallow-incomplete-defs>`
-- :option:`disallow_subclassing_any <mypy --disallow-subclassing-any>`
-- :option:`disallow_untyped_calls <mypy --disallow-untyped-calls>`
-- :option:`disallow_untyped_decorators <mypy --disallow-untyped-decorators>`
-- :option:`disallow_untyped_defs <mypy --disallow-untyped-defs>`
-- :option:`no_implicit_optional <mypy --no-implicit-optional>`
-- :option:`no_implicit_reexport <mypy --no-implicit-reexport>`
-- :option:`strict_equality <mypy --strict-equality>`
-- :option:`warn_redundant_casts <mypy --warn-redundant-casts>`
-- :option:`warn_return_any <mypy --warn-return-any>`
-- :option:`warn_unused_configs <mypy --warn-unused-configs>`
-- :option:`warn_unused_ignores <mypy --warn-unused-ignores>`
-
-The :option:`ignore_missing_imports <mypy --ignore-missing-imports>` option
-is used to disable import errors for selected packages
-where type information is not yet available.
-
-The following options are enabled for enhanced output:
-
+- :option:`strict <mypy --strict>`
 - :option:`pretty <mypy --pretty>`
 - :option:`show_column_numbers <mypy --show-column-numbers>`
 - :option:`show_error_codes <mypy --show-error-codes>`
